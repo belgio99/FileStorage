@@ -93,7 +93,7 @@ void parseCmdLine(int argc, const char * argv[],const char* sockname)
 
 int openConnection(const char* sockname, int msec, const struct timespec abstime)
 {
-	struct sockaddr_un sa;
+	struct sockaddr_un sa; //test
 	strncpy(sa.sun_path, sockname,UNIX_PATH_MAX);
 	sa.sun_family=AF_UNIX;
 	int sk=socket(AF_UNIX,SOCK_STREAM,0);
