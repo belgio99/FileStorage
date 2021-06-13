@@ -38,8 +38,21 @@ Settings serversettings = {0,0,NULL};
 
 void fatalError(char* reason)
 {
-	perror(strcat("Errore: ", reason));
+	char* error = "Errore: ";
+	char* str=malloc(strlen(error)+strlen(reason)+2);
+	strcpy(str, error);
+	perror(strcat(str, reason));
+	free(str);
 	exit(EXIT_FAILURE);
+}
+
+int isNumeric (const char * s)
+{
+	if (s==NULL || *s=='\0' || isspace(*s))
+		return 0;
+	char* p;
+	strtod (s, &p);
+	return *p == '\0';
 }
 
 void socketListener(int sk){
@@ -73,29 +86,35 @@ void readconfig(char* configfilepath)
 	FILE* fPtr=fopen(configfilepath, "r");
 	if (fPtr==NULL)
 		fatalError("File di configurazione non trovato!\n");
-	int sanitizedValue;
+	char* currentsetting = malloc(sizeof(char)*50);
+	char* value = malloc(sizeof(char)*50);
 	while(!feof(fPtr))
 	{
-		char* strtolptr = NULL;
-		char* currentsetting = malloc(sizeof(char)*50);
-		char* value = malloc(sizeof(char)*50);
 		fscanf(fPtr, "%[^= ]=%s\n",currentsetting,value);
 		if (currentsetting==NULL || value==NULL)
 			fatalError("Il file di configurazione ha uno o più valori non validi!\n");
 		else {
 			if (!strcmp(currentsetting, "threadnumber"))
 			{
-				if ((int)strtol(value, &strtolptr, 10)>0 && (sanitizedValue=atoi(value)>0)) // da mettere anche max valore
-					serversettings.threadnumber=sanitizedValue;
+				if (isNumeric(value)) // da mettere anche max valore
+					serversettings.threadnumber=(int)(long)value;
 				else
+				{
+					free(currentsetting);
+					free(value);
 					fatalError("Numero di thread worker non valido!\n");
+				}
 			}
-			else if (!strcmp(currentsetting, "memorysize"))
+			else if (!strcmp(currentsetting, "memorysize")) //da mettere anche max size
 			{
-				if ((int)strtol(value, &strtolptr, 10)>0 && (sanitizedValue=atoi(value)>0))
-					serversettings.memorysize=sanitizedValue;
+				if (isNumeric(value))
+					serversettings.memorysize=(int)(long)value;
 				else
+				{
+					free(currentsetting);
+					free(value);
 					fatalError("Dimensione della memoria del server non valida!\n");
+				}
 			}
 			else if (!strcmp(currentsetting, "socketname"))
 			{
@@ -104,6 +123,8 @@ void readconfig(char* configfilepath)
 			else
 				printf("Configurazione \"%s\" del server non supportata, verrà ignorata",currentsetting);
 		}
+		free(currentsetting);
+		free(value);
 	}
 		fclose(fPtr);
 		if (!serversettings.threadnumber)
@@ -114,10 +135,11 @@ void readconfig(char* configfilepath)
 		if (!serversettings.memorysize)
 		{
 			printf("Non è stata specificata la dimensione della memoria del server nel file di configurazione, verranno usati 100 MB come failsafe.\n");
-			serversettings.threadnumber=1;
+			serversettings.memorysize=100;
 		}
 		if (serversettings.socketname==NULL)
 			fatalError("Non è stato specificato alcun file del socket!");
+	
 
 	}
 
