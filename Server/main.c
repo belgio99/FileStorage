@@ -20,6 +20,7 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <stdbool.h>
+#include <ctype.h>
 
 #define UNIX_PATH_MAX 104
 #define SOCKNAME "asdac"
@@ -27,6 +28,19 @@
 
 #define MAXFILES 100
 
+typedef struct {
+	int threadnumber;
+	int memorysize;
+	char* socketname;
+} Settings;
+
+Settings serversettings = {0,0,NULL};
+
+void fatalError(char* reason)
+{
+	perror(strcat("Errore: ", reason));
+	exit(EXIT_FAILURE);
+}
 
 void socketListener(int sk){
 	int i=0;
@@ -54,28 +68,63 @@ int createServerSocket(void)
 }
 //static int storageFiles = 0;
 //static int storageBytes = 0;
-void readconfig(void)
+void readconfig(char* configfilepath)
 {
-	char* pathname="config.txt";
-	char* text = NULL;
-	FILE* fPtr = NULL;
-	fPtr=fopen(pathname, "r");
+	FILE* fPtr=fopen(configfilepath, "r");
 	if (fPtr==NULL)
+		fatalError("File di configurazione non trovato!\n");
+	int sanitizedValue;
+	while(!feof(fPtr))
 	{
-		printf("File del socket non esistente in %s\n",pathname);
-		exit(EXIT_FAILURE);
+		char* strtolptr = NULL;
+		char* currentsetting = malloc(sizeof(char)*50);
+		char* value = malloc(sizeof(char)*50);
+		fscanf(fPtr, "%[^= ]=%s\n",currentsetting,value);
+		if (currentsetting==NULL || value==NULL)
+			fatalError("Il file di configurazione ha uno o più valori non validi!\n");
+		else {
+			if (!strcmp(currentsetting, "threadnumber"))
+			{
+				if ((int)strtol(value, &strtolptr, 10)>0 && (sanitizedValue=atoi(value)>0)) // da mettere anche max valore
+					serversettings.threadnumber=sanitizedValue;
+				else
+					fatalError("Numero di thread worker non valido!\n");
+			}
+			else if (!strcmp(currentsetting, "memorysize"))
+			{
+				if ((int)strtol(value, &strtolptr, 10)>0 && (sanitizedValue=atoi(value)>0))
+					serversettings.memorysize=sanitizedValue;
+				else
+					fatalError("Dimensione della memoria del server non valida!\n");
+			}
+			else if (!strcmp(currentsetting, "socketname"))
+			{
+				serversettings.socketname=value;
+			}
+			else
+				printf("Configurazione \"%s\" del server non supportata, verrà ignorata",currentsetting);
+		}
 	}
-	fscanf(fPtr, "%s",text);
-	if (text==NULL)
-	{
-		printf("Il nome del socket è vuoto o non valido.\n");
-		exit(EXIT_FAILURE);
+		fclose(fPtr);
+		if (!serversettings.threadnumber)
+		{
+			printf("Non è stato specificato il numero di thread nel file di configurazione, verrà usato 1 come failsafe.\n");
+			serversettings.threadnumber=1;
+		}
+		if (!serversettings.memorysize)
+		{
+			printf("Non è stata specificata la dimensione della memoria del server nel file di configurazione, verranno usati 100 MB come failsafe.\n");
+			serversettings.threadnumber=1;
+		}
+		if (serversettings.socketname==NULL)
+			fatalError("Non è stato specificato alcun file del socket!");
+
 	}
-	fclose(fPtr);
-}
+
 
 int main(int argc, const char * argv[]) {
-	readconfig();
+	char* configfilepath="config.txt";
+	readconfig(configfilepath);
 	
 	pthread_t dispatcher;
 	int sk = createServerSocket();
