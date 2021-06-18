@@ -13,15 +13,29 @@
 #include <sys/types.h>
 #include <errno.h>
 #include <time.h>
-//#include <stdint.h>
+#include "api.h"
+#include "utils.h"
 
-#define UNIX_PATH_MAX 104
-#define SOCKNAME "asdac"
-#define N 100
+
+
+static _Bool connectedflag = FALSE;
 
 void printHelp(void)
 {
-	printf("helpone");
+	printf("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
+			 "Utilizzo: ",
+			 "-h",
+			 "-f filename",
+			 "-w dirname[,n=0]",
+			 "-W file1[,file2]",
+			 "-r file1[,file2]",
+			 "-R[n=0]",
+			 "-d dirname",
+			 "-t time",
+			 "-l file1[,file2]",
+			 "-u file1[,file2]",
+			 "-c file1[,file2]",
+			 "-p");
 	exit(0);
 }
 
@@ -34,7 +48,7 @@ void StringTokenizer(char * string)
 	}
 	
 }
-char* readFile(char* pathname)
+char* readSocketFile(char* pathname)
 {
 	char* text = NULL;
 	FILE* fPtr = NULL;
@@ -85,30 +99,21 @@ void parseCmdLine(int argc, const char * argv[],const char* sockname)
 				break;
 			case 'p':
 				break;
+			case ':':
+				printf("L'opzione %c inserita sarà ignorata perché richiede un argomento.",optopt);
+			case '?':
+				printf("Opzione non supportata!");
+				exit(EXIT_FAILURE);
+				break;
 			default:
 				break;
 		}
 	}
 }
 
-int openConnection(const char* sockname, int msec, const struct timespec abstime)
-{
-	struct sockaddr_un sa; //test
-	strncpy(sa.sun_path, sockname,UNIX_PATH_MAX);
-	sa.sun_family=AF_UNIX;
-	int sk=socket(AF_UNIX,SOCK_STREAM,0);
-	struct sockaddr* test = (struct sockaddr*)&sa;
-	int connstatus;
-	while ((connstatus = connect(sk,test, sizeof(sa)) == -1 && abstime.tv_sec>time(NULL)))
-		usleep(msec*1000);
-	
-	return connstatus;
-}
 
-void closeConnection(const char* sockname)
-{
-	
-}
+
+
 struct timespec inputTime(int* hour, int* minutes)
 {
 	printf("Inserire un orario in formato HH:MM\n");
@@ -142,8 +147,7 @@ int main(int argc, const char * argv[]) {
 		printf("Non connesso");
 		exit(EXIT_FAILURE);
 	}
-	
-	
+	int pipe(int pipedes[2]);
 	
 	return 0;
 }
