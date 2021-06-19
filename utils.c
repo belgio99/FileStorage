@@ -2,7 +2,7 @@
 //  utils.c
 //  Client
 //
-//  Created by BelGio on 18/06/21.
+//  Created on 18/06/21.
 //
 
 #include "utils.h"
@@ -46,13 +46,14 @@ int isNumeric (const char * s)
 	strtod (s, &p);
 	return *p == '\0';
 }
-char* readLocalFile(int fd, const char* pathname, size_t* size)
+char* readLocalFile(const char* pathname, size_t* filesize)
 {
+	int fd;
 	if ((fd=open(pathname,O_RDONLY))==-1)
 		return NULL;
 	struct stat fdbuffer;
 	fstat(fd,&fdbuffer);
-	*size=fdbuffer.st_size;
+	*filesize=fdbuffer.st_size;
 	char* file;
 	if((file = malloc(fdbuffer.st_size+1))==NULL)
 		return NULL;
@@ -60,4 +61,14 @@ char* readLocalFile(int fd, const char* pathname, size_t* size)
 		return NULL;
 	close(fd);
 	return file;
+}
+int saveLocalFile(const char* file, const char* pathname, size_t filesize)
+{
+	if (pathname==NULL)
+		return 0;
+	int fd;
+	if((fd = open(pathname, O_RDWR|O_CREAT , 0666)) == -1 || writen(fd, (void*)file, filesize) == -1) //creazione del file
+		return -1;
+	close(fd);
+	return 0;
 }
