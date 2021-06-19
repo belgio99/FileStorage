@@ -2,7 +2,7 @@
 //  api.c
 //  Client
 //
-//  Created by BelGio on 14/06/21.
+//  Created on 14/06/21.
 //
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,8 +21,32 @@
 
 #include "api.h"
 
+#define MINUS_ONE_RETURN(X,err)													\
+if ((X)==-1) {																			\
+errno = err;																			\
+return -1;																				\
+}
+#define MINUS_ONE_RETURN_WITHFREE(X,err,elemtofree)						\
+if ((X)==-1) {																			\
+errno = err;																			\
+free(elemtofree);																		\
+return -1;																				\
+}
+#define MINUS_ONE_RETURN_WITHMSG(X,err,msg)									\
+if ((X)==-1) {																			\
+errno = err;																			\
+VBON msg; 																				\
+return -1;																				\
+}
+#define MINUS_ONE_RETURN_WITHFREE_WITHMSG(X,err,elemtofree,msg)		\
+if ((X)==-1) {																			\
+errno = err;																			\
+free(elemtofree);																		\
+VBON msg; 																				\
+return -1;																				\
+}
 
-
+#define VBON if(VERBOSEMODE)
 
 static _Bool connected = FALSE;
 static struct sockaddr_un sa;
@@ -80,71 +104,58 @@ int openFile(const char* pathname, int flags)
 	{
 		case O_CREATE:
 			request = OPENCREATE;
-			if (VERBOSEMODE) printf("Provo ad aprire \"%s\" in modalità di creazione.\n",pathname);
+			VBON printf("Provo ad aprire \"%s\" in modalità di creazione.\n",pathname);
 			break;
 		case O_LOCK:
 			request = OPENLOCK;
-			if (VERBOSEMODE) printf("Provo ad aprire \"%s\" in modalità locked.\n",pathname);
+			VBON printf("Provo ad aprire \"%s\" in modalità locked.\n",pathname);
 			break;
 		case O_LOCK_CREATE:
 			request = OPENLOCKCREATE;
-			if (VERBOSEMODE) printf("Provo ad aprire \"%s\" in modalità locked e di creazione.\n",pathname);
+			VBON printf("Provo ad aprire \"%s\" in modalità locked e di creazione.\n",pathname);
 			break;
 		default:
-			if (VERBOSEMODE) printf("I flags non sono stati riconosciuti. Il file \"%s\" verrà aperto in modalità read-only.\n",pathname);
+			VBON printf("I flags non sono stati riconosciuti. Il file \"%s\" verrà aperto in modalità read-only.\n",pathname);
 		case 0:
 			request = OPENFILE;
-			if (VERBOSEMODE) printf("Provo ad aprire \"%s\" in modalità read-only.\n",pathname);
+			VBON printf("Provo ad aprire \"%s\" in modalità read-only.\n",pathname);
 			break;
 	}
 	int serveranswer;
-	if (writen(clientFD, &request, sizeof(request))==-1)
-	{
-		errno=EFAULT;
-		return -1;
-	}
+	MINUS_ONE_RETURN(writen(clientFD, &request, sizeof(request)),EFAULT);
 	size_t pathnamelenght = strlen(pathname)+1;
-	if(writen(clientFD, &pathnamelenght, sizeof(size_t)) == -1){
-		errno = EFAULT;
-		return -1;
-	}
-	if(writen(clientFD, (void * )pathname, pathnamelenght) == -1){
-		errno = EFAULT;
-		return -1;
-	}
-	if(readn(clientFD, &serveranswer, sizeof(serveranswer)) == -1){
-		errno = EFAULT;
-		return -1;
-	}
+	MINUS_ONE_RETURN(writen(clientFD, &pathnamelenght, sizeof(size_t)),EFAULT);
+	MINUS_ONE_RETURN(writen(clientFD, (void * )pathname, pathnamelenght), EFAULT);
+	MINUS_ONE_RETURN(readn(clientFD, &serveranswer, sizeof(serveranswer)),EFAULT);
 	switch (serveranswer){
 		case SUCCESS_OPEN:
-			if (VERBOSEMODE) printf("Il file \"%s\" è stato aperto.\n",pathname);
+			VBON printf("Il file \"%s\" è stato aperto.\n",pathname);
 			break;
 		case SUCCESS_CREATE:
-			if (VERBOSEMODE) printf("Il file \"%s\" è stato creato.\n",pathname);
+			VBON printf("Il file \"%s\" è stato creato.\n",pathname);
 			break;
 		case SUCCESS_LOCK:
-			if (VERBOSEMODE) printf("Il file \"%s\" è stato lockato con successo.\n",pathname);
+			VBON printf("Il file \"%s\" è stato lockato con successo.\n",pathname);
 			break;
 		case SUCCESS_CREATELOCK:
-			if (VERBOSEMODE) printf("Il file \"%s\" è stato creato e lockato con successo.\n",pathname);
+			VBON printf("Il file \"%s\" è stato creato e lockato con successo.\n",pathname);
 			break;
 		case ERROR_FILENOTFOUND:
-			if (VERBOSEMODE) printf("Il file \"%s\" non è stato trovato nel server.\n",pathname);
+			VBON printf("Il file \"%s\" non è stato trovato nel server.\n",pathname);
 			return -1;
 			break;
 		case ERROR_FILEISLOCKED:
-			if (VERBOSEMODE) printf("Non posso accedere al file \"%s\" perché risulta lockato.\n",pathname);
+			VBON printf("Non posso accedere al file \"%s\" perché risulta lockato.\n",pathname);
 			return -1;
 			break;
 		case ERROR_FILEALREADY_EXISTS:
-			if (VERBOSEMODE) printf("Il file \"%s\" è già esistente nel server.\n",pathname);
+			VBON printf("Il file \"%s\" è già esistente nel server.\n",pathname);
 			return -1;
 		case ERROR_FILEALREADY_OPENED:
-			if (VERBOSEMODE) printf("Il file \"%s\" è aperto.\n",pathname);
+			VBON printf("Il file \"%s\" è aperto.\n",pathname);
 			return -1;
 		case ERROR_NOSPACELEFT:
-			if (VERBOSEMODE) printf("Il server è pieno.\n");
+			VBON printf("Il server è pieno.\n");
 			return -1;
 		default: break;
 	}
@@ -159,64 +170,144 @@ int writeFile(const char* pathname, const char* dirname)
 	int request = WRITE;
 	if ((filetosend=readLocalFile(pathname, &filesize))==NULL)
 	{
-		if (VERBOSEMODE) printf("Il file \"%s\" non è stato trovato.\n",pathname);
+		VBON printf("Il file \"%s\" non è stato trovato.\n",pathname);
 		errno = EINVAL;
 		return -1;
 	}
-	if (writen(clientFD, &request, sizeof(request)) == -1)
-	{
-		errno = EFAULT;
-		return -1;
-	}
+	MINUS_ONE_RETURN(writen(clientFD, &request, sizeof(request)),EFAULT);
+	
 	if ((openreturnvalue=openFile(pathname, O_LOCK_CREATE) == -1))
 	{
-		if (VERBOSEMODE) printf("Non posso creare e lockare il file\"%s\" nel server.\n",pathname);
+		VBON printf("Non posso creare e lockare il file\"%s\" nel server.\n",pathname);
 		errno=EFAULT;
 		free(filetosend);
 		return -1;
 	}
-	if(writen(clientFD, &filesize, sizeof(filesize)) == -1){
-		errno = EFAULT;
-		free(filetosend);
-		return -1;
-	}
-	if(writen(clientFD, filetosend, filesize) == -1){
-		errno = EFAULT;
-		free(filetosend);
-		return -1;
-	}
-	if (VERBOSEMODE) printf("File inviato al server!\n");
-	if (VERBOSEMODE) printf("Attendo la risposta dal server per eventuali file da ricevere...\n");
+	MINUS_ONE_RETURN_WITHFREE(writen(clientFD, &filesize, sizeof(filesize)),EFAULT,filetosend);
+	MINUS_ONE_RETURN_WITHFREE(writen(clientFD, filetosend, filesize),EFAULT,filetosend);
+	VBON printf("File inviato al server!\n");
+	VBON printf("Attendo la risposta dal server per eventuali file da ricevere...\n");
 	free(filetosend);
-	
 	int serveranswer;
-	if(readn(clientFD, &serveranswer, sizeof(size_t)) == -1){
-		errno = EQFULL;
-		return -1;
-	}
+	MINUS_ONE_RETURN(readn(clientFD, &serveranswer, sizeof(size_t)),EQFULL);
 	if (serveranswer==ERROR_NOSPACELEFT) {
-		
 		size_t bytestoreceive;
-		
-		if(readn(clientFD, &bytestoreceive, sizeof(bytestoreceive)) == -1){
-			errno = EFAULT;
-			return -1;
-		}
+		MINUS_ONE_RETURN((readn(clientFD, &bytestoreceive, sizeof(bytestoreceive))),EFAULT);
 		while (bytestoreceive>0) {
 			char* receivedFile = malloc(bytestoreceive);
 			if (receivedFile==NULL)
 				return -1;
-			if (saveLocalFile(receivedFile, dirname, (size_t*)bytestoreceive)==-1)
-				if (VERBOSEMODE) printf("Impossibile salvare il file \"%s\" nella cartella \"%s\".\n",pathname,dirname);
+			if (saveLocalFile(receivedFile, dirname, bytestoreceive)==-1)
+				VBON printf("Impossibile salvare il file \"%s\" nella cartella \"%s\".\n",pathname,dirname);
 			free(receivedFile);
 		}
 	}
 	if(serveranswer == ERROR_FAILTOSAVE){
-		if (VERBOSEMODE) printf("Scrittura del file \"%s\" fallita!\n",pathname);
+		VBON printf("Scrittura del file \"%s\" fallita!\n",pathname);
 		errno = EFAULT;
 		return -1;
 	}
+	VBON printf("Scrittura del file \"%s\" riuscita. Sono stati scritti %zu bytes\n",pathname,filesize);
+	return 0;
+}
+int readFile(const char* pathname, void** buf, size_t* size)
+{
+	int request=READ;
+	VBON printf("Provo a leggere il file \"%s\".\n",pathname);
+	MINUS_ONE_RETURN(writen(clientFD, &request, sizeof(request)),EFAULT);
+	size_t pathlength = strlen(pathname)+1;
+	MINUS_ONE_RETURN(writen(clientFD, &pathlength, sizeof(size_t)),EFAULT);
+	MINUS_ONE_RETURN(writen(clientFD, (void * )pathname, pathlength),EFAULT);
+	size_t serveranswer = -1;
+	MINUS_ONE_RETURN_WITHMSG(readn(clientFD, &serveranswer, sizeof(serveranswer)),EFAULT, printf("Lettura del file \"%s\" fallita.\n",pathname)); //da sostituire con read success
+	MINUS_ONE_RETURN(serveranswer,EFAULT);
+	*buf = malloc(serveranswer);
+	if(!*buf){ errno = ENOMEM; return -1; }
+	memset(*buf,'\0',serveranswer);
+	int fileread;
+	MINUS_ONE_RETURN(fileread = readn(clientFD, *buf, (int)serveranswer),EFAULT);
+	*size = serveranswer;
+	VBON printf("Lettura del file \"%s\" riuscita.\n",pathname);
+	return 0;
+}
 
-	if (VERBOSEMODE) printf("Scrittura del file \"%s\" riuscita. Sono stati scritti %zu bytes\n",pathname,filesize);
+
+int removeFile(const char* pathname){
+	int request = REMOVE;
+	VBON printf("Provo a rimuovere il file \"%s\".\n",pathname);
+	MINUS_ONE_RETURN(writen(clientFD, &request, sizeof(request)),EFAULT);
+	size_t pathlength = strlen(pathname)+1;
+	MINUS_ONE_RETURN(writen(clientFD, &pathlength, sizeof(size_t)),EFAULT);
+	MINUS_ONE_RETURN(writen(clientFD, (void * )pathname, pathlength),EFAULT);
+	int serveranswer = 1;
+	MINUS_ONE_RETURN_WITHMSG(readn(clientFD, &serveranswer, sizeof(serveranswer)),EFAULT, printf("Rimozione del file \"%s\" fallita.\n",pathname)); //da sostituire con read success
+	MINUS_ONE_RETURN(serveranswer,EFAULT);
+	VBON printf("Rimozione del file \"%s\" riuscita.\n",pathname);
+	return 0;
+}
+
+
+int lockFile(const char* pathname){
+	int request = LOCK;
+	VBON printf("Provo a lockare il file \"%s\".\n",pathname);
+	MINUS_ONE_RETURN(writen(clientFD, &request, sizeof(request)),EFAULT);
+	size_t pathlength = strlen(pathname)+1;
+	MINUS_ONE_RETURN(writen(clientFD, &pathlength, sizeof(size_t)),EFAULT);
+	MINUS_ONE_RETURN(writen(clientFD, (void * )pathname, pathlength),EFAULT);
+	int serveranswer = 1;
+	MINUS_ONE_RETURN_WITHMSG(readn(clientFD, &serveranswer, sizeof(serveranswer)),EFAULT, printf("Lock del file \"%s\" fallita.\n",pathname)); //da sostituire con read success
+	MINUS_ONE_RETURN(serveranswer,EFAULT);
+	VBON printf("Lock del file \"%s\" riuscita.\n",pathname);
+	return 0;
+}
+
+
+int readNFiles(int N, const char* dirname){
+	int request = READN;
+	MINUS_ONE_RETURN(writen(clientFD, &request, sizeof(request)),EFAULT);
+	int bytesread = 0;
+	int bytestoreceive=0;
+	char* receivedFile=malloc(sizeof(receivedFile));
+	while(1)
+	{
+		MINUS_ONE_RETURN(readn(clientFD, &bytestoreceive, sizeof(bytestoreceive)),EFAULT);
+		if (bytestoreceive==0)
+			break;
+		MINUS_ONE_RETURN(readn(clientFD, &receivedFile, sizeof(receivedFile)),EFAULT);
+		saveLocalFile(receivedFile, dirname, bytestoreceive);
+		bytesread+=bytestoreceive;
+	}
+	return bytesread;
+	
+}
+
+int appendToFile(const char* pathname, void* buf, size_t size, const char* dirname){
+	int request = APPEND;
+	VBON printf("Provo ad appendere dati al file \"%s\".\n",pathname);
+	MINUS_ONE_RETURN(writen(clientFD, &request, sizeof(request)),EFAULT);
+	size_t pathlength = strlen(pathname)+1;
+	MINUS_ONE_RETURN(writen(clientFD, &pathlength, sizeof(size_t)),EFAULT);
+	MINUS_ONE_RETURN(writen(clientFD, (void * )pathname, pathlength),EFAULT);
+	int serveranswer = 0;
+	MINUS_ONE_RETURN_WITHMSG(readn(clientFD, &serveranswer, sizeof(serveranswer)),EFAULT, printf("Non riesco ad aprire il file \"%s\".\n",pathname)); //da sostituire con read success
+	MINUS_ONE_RETURN(writen(clientFD, &size, sizeof(size_t)),EFAULT);
+	MINUS_ONE_RETURN(writen(clientFD, buf, size),EFAULT);
+	serveranswer=-1;
+	MINUS_ONE_RETURN(readn(clientFD, &serveranswer, sizeof(int)),EQFULL);
+	if (serveranswer==ERROR_NOSPACELEFT) {
+		size_t bytestoreceive;
+		MINUS_ONE_RETURN((readn(clientFD, &bytestoreceive, sizeof(bytestoreceive))),EFAULT);
+		while (bytestoreceive>0) {
+			char* receivedFile = malloc(bytestoreceive);
+			if (receivedFile==NULL)
+				return -1;
+			if (saveLocalFile(receivedFile, dirname, bytestoreceive)==-1)
+				VBON printf("Impossibile salvare il file \"%s\" nella cartella \"%s\".\n",pathname,dirname);
+			free(receivedFile);
+		}
+	}
+	serveranswer=-1;
+	MINUS_ONE_RETURN_WITHMSG(readn(clientFD, &serveranswer, sizeof(serveranswer)),EFAULT, printf("L'append del file \"%s\" è fallito!\n",pathname));
+	printf("L'append del file \"%s\" è riuscito.\n",pathname);
 	return 0;
 }
