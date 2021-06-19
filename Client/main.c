@@ -13,12 +13,24 @@
 #include <sys/types.h>
 #include <errno.h>
 #include <time.h>
-#include "api.h"
-#include "utils.h"
+#include "../header/api.h"
+#include "../header/utils.h"
+#include <dirent.h>
 
 
-
+static char* dirname;
 static _Bool connectedflag = FALSE;
+
+typedef struct settings
+{
+	char* socketname;
+	char* dirname_capacitymisses;
+	char* dirname_readnwrite;
+	int time;
+	_Bool p;
+} Settings;
+
+Settings clientsettings = {NULL,NULL,NULL,0,0};
 
 void printHelp(void)
 {
@@ -39,15 +51,6 @@ void printHelp(void)
 	exit(0);
 }
 
-void StringTokenizer(char * string)
-{
-	char* tokenized = strtok(string, ",");
-	while (tokenized!=NULL)
-	{
-		tokenized = strtok(NULL, ",");
-	}
-	
-}
 char* readSocketFile(char* pathname)
 {
 	char* text = NULL;
@@ -67,10 +70,144 @@ char* readSocketFile(char* pathname)
 	fclose(fPtr);
 	return text;
 }
+void recursiveReadFolders(char* abspath, int* n)
+{
+	struct dirent* entry = NULL;
+	DIR* directory = opendir(abspath);
+	while ((entry=readdir(directory))==NULL || n==0)
+	{
+		if (entry->d_type==DT_DIR)
+			if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {}
+			else
+			{
+				char* newpath=realpath(entry->d_name, NULL);
+				recursiveReadFolders(newpath, n);
+			}
+			else if (entry->d_type==DT_REG)
+			{
+				abspath=(entry->d_name);
+				writeFile(abspath, NULL);
+				usleep(clientsettings.time*1000);
+				n-=1;
+			}
+	}
+	closedir(directory);
+	return;
+}
+int w_handler(char* string)
+{
+	char* tempstring;
+	char* dirname = strtok_r(string, ",",&tempstring);
+	char* nstring = NULL;
+	nstring = strtok_r(string, NULL ,&tempstring);
+	int n=0;
+	if (nstring!=NULL)
+		sscanf(nstring, "n=%d",&n);
+	char* abspath=realpath(dirname, NULL);
+	recursiveReadFolders(abspath,&n);
+	return 0;
+}
+int W_handler(char* string, char* dirname)
+{
+	char* tempstring;
+	char* firstfile=strtok_r(string, ",",&tempstring);
+	writeFile(firstfile, dirname);
+	usleep(clientsettings.time*1000);
+	char* currentfile=malloc(sizeof(char)*1024);
+	while ((strcpy(currentfile,strtok_r(string, NULL ,&tempstring)))!=NULL)
+	{
+		writeFile(currentfile, dirname);
+		usleep(clientsettings.time*1000);
+	}
+	free(currentfile);
+	return 0;
+}
+int r_handler(char* string, char* dirname)
+{
+	void *buf = NULL;
+	size_t filesize = -1;
+	char* tempstring;
+	char* firstfile=strtok_r(string, ",",&tempstring);
+	writeFile(firstfile, dirname);
+	usleep(clientsettings.time*1000);
+	char* currentfile=malloc(sizeof(char)*1024);
+	while ((strcpy(currentfile,strtok_r(string, NULL ,&tempstring)))!=NULL)
+	{
+		readFile(currentfile, &buf,&filesize);
+		usleep(clientsettings.time*1000);
+	}
+	free(currentfile);
+	return 0;
+}
+int l_handler(char* string)
+{
+	char* tempstring;
+	char* firstfile=strtok_r(string, ",",&tempstring);
+	writeFile(firstfile, dirname);
+	char* currentfile=malloc(sizeof(char)*1024);
+	while ((strcpy(currentfile,strtok_r(string, NULL ,&tempstring)))!=NULL)
+	{
+		lockFile(currentfile);
+		usleep(clientsettings.time*1000);
+	}
+	free(currentfile);
+	return 0;
+}
+int u_handler(char* string)
+{
+	char* tempstring;
+	char* firstfile=strtok_r(string, ",",&tempstring);
+	writeFile(firstfile, dirname);
+	char* currentfile=malloc(sizeof(char)*1024);
+	while ((strcpy(currentfile,strtok_r(string, NULL ,&tempstring)))!=NULL)
+	{
+		unlockFile(currentfile);
+		usleep(clientsettings.time*1000);
+	}
+	free(currentfile);
+	return 0;
+}
+int c_handler(char* string)
+{
+	char* tempstring;
+	char* firstfile=strtok_r(string, ",",&tempstring);
+	writeFile(firstfile, dirname);
+	char* currentfile=malloc(sizeof(char)*1024);
+	while ((strcpy(currentfile,strtok_r(string, NULL ,&tempstring)))!=NULL)
+	{
+		removeFile(currentfile);
+		usleep(clientsettings.time*1000);
+	}
+	free(currentfile);
+	return 0;
+}
+int R_handler(int N)
+{
+	readNFiles(N, dirname);
+	return 0;
+}
+
 void parseCmdLine(int argc, const char * argv[],const char* sockname)
 {
 	int opt;
-	while ((opt = getopt(argc, (char *const *) argv, "hf:W:r:R:d:t:l:u:c:p:")) != -1)
+	while ((opt = getopt(argc, (char *const *) argv, "d:t:p")) != -1)
+	{
+		switch (opt) {
+			case 'D':
+				clientsettings.dirname_capacitymisses=optarg;
+				break;
+			case 'd':
+				clientsettings.dirname_readnwrite=optarg;
+				break;
+			case 't':
+				clientsettings.time=(int)optarg;
+				break;
+			case 'p':
+				clientsettings.p=1;
+				break;
+		}
+	}
+	while ((opt = getopt(argc, (char *const *) argv, "hf:w:W:r:R:l:u:c:")) != -1)
 	{
 		switch (opt) {
 			case 'h':
@@ -78,24 +215,33 @@ void parseCmdLine(int argc, const char * argv[],const char* sockname)
 				break;
 			case 'f':
 				sockname=optarg;
-				//sockname=readFile(optarg); //Da implementare
+				break;
+			case 'w':
+				w_handler(optarg);
 				break;
 			case 'W':
-				StringTokenizer(optarg);
+				W_handler(optarg,dirname);
 				break;
 			case 'r':
+				r_handler(optarg,dirname);
 				break;
 			case 'R':
+				R_handler((int)optarg);
+				break;
+			case 'l':
+				l_handler(optarg);
+				break;
+			case 'u':
+				u_handler(optarg);
+				break;
+			case 'c':
+				c_handler(optarg);
+				break;
+			case 'D':
 				break;
 			case 'd':
 				break;
 			case 't':
-				break;
-			case 'l':
-				break;
-			case 'u':
-				break;
-			case 'c':
 				break;
 			case 'p':
 				break;
@@ -147,7 +293,6 @@ int main(int argc, const char * argv[]) {
 		printf("Non connesso");
 		exit(EXIT_FAILURE);
 	}
-	int pipe(int pipedes[2]);
 	
 	return 0;
 }
