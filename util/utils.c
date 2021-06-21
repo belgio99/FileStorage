@@ -5,7 +5,15 @@
 //  Created on 18/06/21.
 //
 
-#include "utils.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <sys/fcntl.h>
+#include <sys/stat.h>
+#include <string.h>
+
+#include "../header/utils.h"
 
 ssize_t readn(int fd, void *ptr, size_t n) {
 	size_t   nleft;

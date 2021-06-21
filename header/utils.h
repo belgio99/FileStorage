@@ -8,14 +8,6 @@
 #ifndef utils_h
 #define utils_h
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <sys/fcntl.h>
-#include <sys/stat.h>
-#include <string.h>
-
 
 
 #define OPENFILE							1
@@ -25,8 +17,8 @@
 #define READ 								5
 #define READN 								6
 #define APPEND 							7
-#define LOCK 								8
-#define UNLOCK 							9
+#define LOCKFILE 							8
+#define UNLOCKFILE 						9
 #define CLOSEFILE 						10
 #define REMOVE 							11
 #define CLOSECONN 						12
@@ -34,14 +26,17 @@
 
 #define SUCCESS_OPEN    				1
 #define SUCCESS_CREATE  				2
-#define SUCCESS_LOCK    				3
-#define SUCCESS_CREATELOCK 			4
-#define ERROR_FILEALREADY_EXISTS		5
-#define ERROR_FILEALREADY_OPENED 	6
-#define ERROR_FILEISLOCKED				7
+#define SUCCESS_OPENLOCK 				3
+#define SUCCESS_OPENCREATE 			4
+#define SUCCESS_OPENLOCKCREATE 		5
+#define SUCCESS_LOCK    				6
+#define SUCCESS_UNLOCK					7
+#define ERROR_FILEALREADY_EXISTS		8
+#define ERROR_FILEALREADY_OPENED 	9
+#define ERROR_FILEISLOCKED				10
 #define ERROR_FILENOTFOUND				404
-#define ERROR_NOSPACELEFT 				8
-#define ERROR_FAILTOSAVE				9
+#define ERROR_NOSPACELEFT 				11
+#define ERROR_FAILTOSAVE				12
 
 #define O_CREATE 							1
 #define O_LOCK 							2
