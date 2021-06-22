@@ -24,6 +24,7 @@
 #define CLOSECONN 						12
 #define WRITE								13
 
+#define SUCCESS							0
 #define SUCCESS_OPEN    				1
 #define SUCCESS_CREATE  				2
 #define SUCCESS_OPENLOCK 				3
@@ -37,6 +38,8 @@
 #define ERROR_FILENOTFOUND				404
 #define ERROR_NOSPACELEFT 				11
 #define ERROR_FAILTOSAVE				12
+#define ERROR_FILETOOBIG				13
+#define ERROR 								-1
 
 #define O_CREATE 							1
 #define O_LOCK 							2
@@ -46,7 +49,6 @@
 #define FALSE 								0
 #define TRUE 								1
 
-#define SOCKNAME 							"blablabla"
 
 #define VERBOSEMODE 1
 
@@ -54,5 +56,4 @@
 ssize_t readn(int fd, void *ptr, size_t n);
 ssize_t writen(int fd, void *ptr, size_t n);
 int isNumeric (const char * s);
-char* readLocalFile(const char* pathname, size_t* size);
-int saveLocalFile(const char* file, const char* pathname, size_t filesize);
+const char* readSocketFile(char* pathname);

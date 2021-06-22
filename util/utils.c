@@ -12,8 +12,9 @@
 #include <sys/fcntl.h>
 #include <sys/stat.h>
 #include <string.h>
+#include <errno.h>
 
-#include "../header/utils.h"
+#include "utils.h"
 
 ssize_t readn(int fd, void *ptr, size_t n) {
 	size_t   nleft;
@@ -54,29 +55,22 @@ int isNumeric (const char * s)
 	strtod (s, &p);
 	return *p == '\0';
 }
-char* readLocalFile(const char* pathname, size_t* filesize)
+const char* readSocketFile(char* pathname)
 {
-	int fd;
-	if ((fd=open(pathname,O_RDONLY))==-1)
-		return NULL;
-	struct stat fdbuffer;
-	fstat(fd,&fdbuffer);
-	*filesize=fdbuffer.st_size;
-	char* file;
-	if((file = malloc(fdbuffer.st_size+1))==NULL)
-		return NULL;
-	if(readn(fd, file, fdbuffer.st_size+1)==-1)
-		return NULL;
-	close(fd);
-	return file;
-}
-int saveLocalFile(const char* file, const char* pathname, size_t filesize)
-{
-	if (pathname==NULL)
-		return 0;
-	int fd;
-	if((fd = open(pathname, O_RDWR|O_CREAT , 0666)) == -1 || writen(fd, (void*)file, filesize) == -1) //creazione del file
-		return -1;
-	close(fd);
-	return 0;
+	char* text=malloc(sizeof(char)*35);
+	FILE* fPtr = NULL;
+	fPtr=fopen(pathname, "r");
+	if (fPtr==NULL)
+	{
+		printf("File del socket non esistente in %s\n",pathname);
+		exit(EXIT_FAILURE);
+	}
+	fscanf(fPtr, "%s",text);
+	if (text==NULL)
+	{
+		printf("Il nome del socket è vuoto o non valido.\n");
+		exit(EXIT_FAILURE);
+	}
+	fclose(fPtr);
+	return text;
 }
