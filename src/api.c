@@ -276,7 +276,7 @@ int writeFile(const char* pathname, const char* dirname)
 	 printf("Attendo la risposta dal server per eventuali file da ricevere...\n");
 	free(filetosend);
 	int serverAnswer;
-	MINUS_ONE_RETURN(readn(clientFD, &serverAnswer, sizeof(int)),EQFULL);
+	MINUS_ONE_RETURN(readn(clientFD, &serverAnswer, sizeof(int)),EFAULT);
 	if (serverAnswer==ERROR_NOSPACELEFT)
 		fileReplacement(clientFD, dirname);
 	if(serverAnswer == ERROR_FAILTOSAVE || serverAnswer==ERROR){

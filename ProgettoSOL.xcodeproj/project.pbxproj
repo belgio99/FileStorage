@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		32B667C826833A5700C6CA9A /* api.c in Sources */ = {isa = PBXBuildFile; fileRef = 32B667C526833A5700C6CA9A /* api.c */; };
 		32B667C926833A5700C6CA9A /* server.c in Sources */ = {isa = PBXBuildFile; fileRef = 32B667C626833A5700C6CA9A /* server.c */; };
 		32B667CA26833A5A00C6CA9A /* client.c in Sources */ = {isa = PBXBuildFile; fileRef = 32B667C426833A5700C6CA9A /* client.c */; };
-		32B667CE26833A7000C6CA9A /* linkedlist.c in Sources */ = {isa = PBXBuildFile; fileRef = 32B667CB26833A7000C6CA9A /* linkedlist.c */; };
-		32B667CF26833A7000C6CA9A /* icl_hash.c in Sources */ = {isa = PBXBuildFile; fileRef = 32B667CC26833A7000C6CA9A /* icl_hash.c */; };
-		32B667D026833A7000C6CA9A /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 32B667CD26833A7000C6CA9A /* utils.c */; };
+		32B667DC26833B9700C6CA9A /* api.c in Sources */ = {isa = PBXBuildFile; fileRef = 32B667C526833A5700C6CA9A /* api.c */; };
+		32B667E526833D2F00C6CA9A /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 32B667E226833D2F00C6CA9A /* utils.c */; };
+		32B667E626833D2F00C6CA9A /* icl_hash.c in Sources */ = {isa = PBXBuildFile; fileRef = 32B667E326833D2F00C6CA9A /* icl_hash.c */; };
+		32B667E726833D2F00C6CA9A /* linkedlist.c in Sources */ = {isa = PBXBuildFile; fileRef = 32B667E426833D2F00C6CA9A /* linkedlist.c */; };
+		32B667E826833D5400C6CA9A /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 32B667E226833D2F00C6CA9A /* utils.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,18 +40,18 @@
 /* Begin PBXFileReference section */
 		3241F1AB2671183A005AEF2E /* Server */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Server; sourceTree = BUILT_PRODUCTS_DIR; };
 		3241F1B92671186E005AEF2E /* Client */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Client; sourceTree = BUILT_PRODUCTS_DIR; };
-		32B667C426833A5700C6CA9A /* client.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = client.c; sourceTree = "<group>"; };
-		32B667C526833A5700C6CA9A /* api.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = api.c; sourceTree = "<group>"; };
-		32B667C626833A5700C6CA9A /* server.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = server.c; sourceTree = "<group>"; };
-		32B667CB26833A7000C6CA9A /* linkedlist.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = linkedlist.c; sourceTree = "<group>"; };
-		32B667CC26833A7000C6CA9A /* icl_hash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = icl_hash.c; path = "../../../../../../../Downloads/bk/GiovanniBellini-ProgettoSOL/util/icl_hash.c"; sourceTree = "<group>"; };
-		32B667CD26833A7000C6CA9A /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
-		32B667D626833AC100C6CA9A /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
-		32B667D726833AC100C6CA9A /* linkedlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = linkedlist.h; sourceTree = "<group>"; };
-		32B667D826833AC100C6CA9A /* api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = api.h; sourceTree = "<group>"; };
-		32B667D926833AC100C6CA9A /* icl_hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = icl_hash.h; sourceTree = "<group>"; };
-		32B667DA26833AD600C6CA9A /* config.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = config.txt; path = "../../../../../../Downloads/bk/GiovanniBellini-ProgettoSOL/config.txt"; sourceTree = "<group>"; };
-		32B667DB26833AE400C6CA9A /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = makefile; path = "../../../../../../Downloads/bk/GiovanniBellini-ProgettoSOL/makefile"; sourceTree = "<group>"; };
+		32B667C426833A5700C6CA9A /* client.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = client.c; path = src/client.c; sourceTree = SOURCE_ROOT; };
+		32B667C526833A5700C6CA9A /* api.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = api.c; path = src/api.c; sourceTree = SOURCE_ROOT; };
+		32B667C626833A5700C6CA9A /* server.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = server.c; path = src/server.c; sourceTree = SOURCE_ROOT; };
+		32B667D626833AC100C6CA9A /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = utils.h; path = header/utils.h; sourceTree = SOURCE_ROOT; };
+		32B667D726833AC100C6CA9A /* linkedlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = linkedlist.h; path = header/linkedlist.h; sourceTree = SOURCE_ROOT; };
+		32B667D826833AC100C6CA9A /* api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = api.h; path = header/api.h; sourceTree = SOURCE_ROOT; };
+		32B667D926833AC100C6CA9A /* icl_hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = icl_hash.h; path = header/icl_hash.h; sourceTree = SOURCE_ROOT; };
+		32B667DE26833C8500C6CA9A /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; };
+		32B667DF26833C9E00C6CA9A /* config.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = config.txt; sourceTree = "<group>"; };
+		32B667E226833D2F00C6CA9A /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = utils.c; path = include/utils.c; sourceTree = SOURCE_ROOT; };
+		32B667E326833D2F00C6CA9A /* icl_hash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = icl_hash.c; path = include/icl_hash.c; sourceTree = SOURCE_ROOT; };
+		32B667E426833D2F00C6CA9A /* linkedlist.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = linkedlist.c; path = include/linkedlist.c; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +77,8 @@
 			children = (
 				32B667D526833AC100C6CA9A /* header */,
 				32B667C326833A4700C6CA9A /* src */,
-				32B667DB26833AE400C6CA9A /* makefile */,
-				32B667DA26833AD600C6CA9A /* config.txt */,
+				32B667DE26833C8500C6CA9A /* makefile */,
+				32B667DF26833C9E00C6CA9A /* config.txt */,
 				327BB76B267E048000094233 /* include */,
 				3241F1AC2671183A005AEF2E /* Products */,
 			);
@@ -90,17 +91,17 @@
 				3241F1B92671186E005AEF2E /* Client */,
 			);
 			name = Products;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		327BB76B267E048000094233 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				32B667CC26833A7000C6CA9A /* icl_hash.c */,
-				32B667CB26833A7000C6CA9A /* linkedlist.c */,
-				32B667CD26833A7000C6CA9A /* utils.c */,
+				32B667E326833D2F00C6CA9A /* icl_hash.c */,
+				32B667E426833D2F00C6CA9A /* linkedlist.c */,
+				32B667E226833D2F00C6CA9A /* utils.c */,
 			);
 			path = include;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		32B667C326833A4700C6CA9A /* src */ = {
 			isa = PBXGroup;
@@ -110,7 +111,7 @@
 				32B667C626833A5700C6CA9A /* server.c */,
 			);
 			path = src;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		32B667D526833AC100C6CA9A /* header */ = {
 			isa = PBXGroup;
@@ -121,7 +122,7 @@
 				32B667D926833AC100C6CA9A /* icl_hash.h */,
 			);
 			path = header;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -200,11 +201,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32B667CE26833A7000C6CA9A /* linkedlist.c in Sources */,
+				32B667E726833D2F00C6CA9A /* linkedlist.c in Sources */,
+				32B667E626833D2F00C6CA9A /* icl_hash.c in Sources */,
+				32B667E526833D2F00C6CA9A /* utils.c in Sources */,
 				32B667C926833A5700C6CA9A /* server.c in Sources */,
-				32B667C826833A5700C6CA9A /* api.c in Sources */,
-				32B667D026833A7000C6CA9A /* utils.c in Sources */,
-				32B667CF26833A7000C6CA9A /* icl_hash.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +212,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32B667E826833D5400C6CA9A /* utils.c in Sources */,
+				32B667DC26833B9700C6CA9A /* api.c in Sources */,
 				32B667CA26833A5A00C6CA9A /* client.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
