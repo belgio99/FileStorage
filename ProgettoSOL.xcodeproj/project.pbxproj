@@ -75,11 +75,11 @@
 		3241F1A22671183A005AEF2E = {
 			isa = PBXGroup;
 			children = (
+				327BB76B267E048000094233 /* include */,
 				32B667D526833AC100C6CA9A /* header */,
 				32B667C326833A4700C6CA9A /* src */,
 				32B667DE26833C8500C6CA9A /* makefile */,
 				32B667DF26833C9E00C6CA9A /* config.txt */,
-				327BB76B267E048000094233 /* include */,
 				3241F1AC2671183A005AEF2E /* Products */,
 			);
 			sourceTree = "<group>";
