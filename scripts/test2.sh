@@ -1,9 +1,12 @@
 #!/bin/bash
+./bins/server /tmp/config.txt &
+pid=$!
+sleep 3
+prefix="./bins/client -f /tmp/LSOSocket.sk -p -t 200"
 
-prefix="./bin/client -f /tmp/LSOSocket.txt -p -t 200"
 
-$prefix -w ./bin
+$prefix -w ./tests -D ./replacementdir
+sleep 1
 
-$prefix -w ./bin -D $(pwd)/filesRimpiazzati/
-
-$prefix -w ./bin -D $(pwd)/replacedFiles2/
+kill -s SIGHUP $pid
+wait $pid

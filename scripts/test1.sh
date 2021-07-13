@@ -1,36 +1,42 @@
 #!/bin/bash
-#prefix="valgrind --leak-check=full ./bin/client -f ./sock -p -t 200"
-prefix="./bin/client -f /tmp/LSOSocket.txt -p -t 200"
+valgrind --leak-check=full ./bins/server /tmp/config.txt &
+pid=$!
+
+sleep 3s
+prefix="./bins/client -f /tmp/LSOSocket.sk -p -t 200"
 
 #stampa help
 $prefix -h
 
-#scrittura di n file all'interno una directory con altre directory all'interno
-$prefix -w ./bin/,4
+#scrittura di 1 file
 
-#scrittura di tutti i file all'interno una directory con altre directory all'interno
-$prefix -w ./bin/
+$prefix -W ./tests/test1.txt
 
+#scrittura di più file separati da virgola
 
-$prefix -w ./bin/ -D $(pwd)/replacedbin1/
+$prefix -W ./tests/test1.txt,./tests/test2.txt
 
+#scrittura di N file in modo ricorsivo
+$prefix -w ./tests/dirfile1,n=3
 
-#scrittura di file separati da virgola
-$prefix -W ./bin/text1.txt,$./bin2/prova2,$./bin2/prova3 -D $./replacedbin2/
+#append di una stringa in un file del server
+$prefix -a test1.txt,provaappend
 
-#lettura di un file e scrittura in una cartella su disco
-$prefix -d ./tests -r $(pwd)/bin/prova1.txt
+#chiusura (e dunque compressione) di un file del server
+$prefix -C test2.txt
 
-#lettura di tutti i file del server
-$prefix -d ./text/ -R
+#apertura (e dunque decompressione) di un file del server
+$prefix -O test2.txt
 
-#lettura di N file del server
-$prefix -d ./read_dir3/ -R 4
+# lettura di 2 file dal server, con scrittura nella cartella dell'opzione -d
+$prefix -r test1.txt,test2.txt -d ./replacementdir
 
-#applicazione lock a un file
-$prefix -l $(pwd)/bin/text1.txt
+# lock e unlock di file
+$prefix -l test1.txt -u test1.txt
 
-# unlock e remove a un file
-$prefix -u $(pwd)/bin/prova1 -c $(pwd)/bin/prova1
+#rimozione di file dal server
+$prefix -c test1.txt
+sleep 1
 
-
+kill -s SIGHUP $pid
+wait $pid
