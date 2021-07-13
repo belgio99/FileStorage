@@ -14,7 +14,9 @@
 #include <string.h>
 #include <errno.h>
 
-#include "utils.h"
+#include "../header/utils.h"
+
+
 
 ssize_t readn(int fd, void *ptr, size_t n) {
 	size_t   nleft;
@@ -55,22 +57,29 @@ int isNumeric (const char * s)
 	strtod (s, &p);
 	return *p == '\0';
 }
-const char* readSocketFile(char* pathname)
+
+char* readLocalFile(const char* pathname, size_t* filesize)
 {
-	char* text=malloc(sizeof(char)*35);
-	FILE* fPtr = NULL;
-	fPtr=fopen(pathname, "r");
-	if (fPtr==NULL)
-	{
-		printf("File del socket non esistente in %s\n",pathname);
-		exit(EXIT_FAILURE);
-	}
-	fscanf(fPtr, "%s",text);
-	if (text==NULL)
-	{
-		printf("Il nome del socket è vuoto o non valido.\n");
-		exit(EXIT_FAILURE);
-	}
-	fclose(fPtr);
-	return text;
+	int fd;
+	if ((fd=open(pathname,O_RDONLY))==-1)
+		return NULL;
+	struct stat fdbuffer;
+	fstat(fd,&fdbuffer);
+	*filesize=fdbuffer.st_size+1;
+	char* file;
+	if((file = malloc(fdbuffer.st_size+1))==NULL)
+		return NULL;
+	memset(file,'\0',(int)fdbuffer.st_size+1);
+	if (readn(fd, file, fdbuffer.st_size+1)==-1)
+		return NULL;
+	close(fd);
+	return file;
+}
+int saveLocalFile(const char* filecontents, const char* path, size_t filesize)
+{
+	int fd;
+	if((fd = open(path, O_RDWR|O_CREAT , 0666)) == -1 || writen(fd, (void*)filecontents, filesize) == -1)
+		return -1;
+	close(fd);
+	return 0;
 }
