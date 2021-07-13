@@ -1,0 +1,246 @@
+Inizio file di log del server
+Numero di thread worker impostato su: 4
+Dimensione della memoria impostata su: 1 MB
+Numero massimo di file memorizzabili impostato su: 10
+Nome del file del socket: /tmp/LSOSocket.sk
+Creazione del socket...
+Bind riuscita.
+Socket creato.
+Nuova richiesta arrivata.
+Pathname ricevuto: test7.txt
+Creazione del file test7.txt...
+Il file test7.txt è stato creato correttamente.
+Contenuti del file appena ricevuto: Della
+Scrivo i contenuti nel file test7.txt...
+Controllo se c'è da utilizzare l'algoritmo di rimpiazzamento ...
+Non c'è bisogno di usare l'algoritmo di rimpiazzamento.
+Aggiorno le statistiche del server con 6 dati in più:
+Statistiche del server aggiornate.
+Salvataggio dei contenuti del file test7.txt riuscito.
+Nuova richiesta arrivata.
+Pathname ricevuto: test6.txt
+Creazione del file test6.txt...
+Il file test6.txt è stato creato correttamente.
+Contenuti del file appena ricevuto: Prova
+Scrivo i contenuti nel file test6.txt...
+Controllo se c'è da utilizzare l'algoritmo di rimpiazzamento ...
+Non c'è bisogno di usare l'algoritmo di rimpiazzamento.
+Aggiorno le statistiche del server con 6 dati in più:
+Statistiche del server aggiornate.
+Salvataggio dei contenuti del file test6.txt riuscito.
+Nuova richiesta arrivata.
+Pathname ricevuto: test4.txt
+Creazione del file test4.txt...
+Il file test4.txt è stato creato correttamente.
+Contenuti del file appena ricevuto: su
+Scrivo i contenuti nel file test4.txt...
+Controllo se c'è da utilizzare l'algoritmo di rimpiazzamento ...
+Non c'è bisogno di usare l'algoritmo di rimpiazzamento.
+Aggiorno le statistiche del server con 3 dati in più:
+Statistiche del server aggiornate.
+Salvataggio dei contenuti del file test4.txt riuscito.
+Nuova richiesta arrivata.
+Pathname ricevuto: test5.txt
+Creazione del file test5.txt...
+Il file test5.txt è stato creato correttamente.
+Contenuti del file appena ricevuto: server
+Scrivo i contenuti nel file test5.txt...
+Controllo se c'è da utilizzare l'algoritmo di rimpiazzamento ...
+Non c'è bisogno di usare l'algoritmo di rimpiazzamento.
+Aggiorno le statistiche del server con 7 dati in più:
+Statistiche del server aggiornate.
+Salvataggio dei contenuti del file test5.txt riuscito.
+Nuova richiesta arrivata.
+Pathname ricevuto: test1.txt
+Creazione del file test1.txt...
+Il file test1.txt è stato creato correttamente.
+Contenuti del file appena ricevuto: Prova
+Scrivo i contenuti nel file test1.txt...
+Controllo se c'è da utilizzare l'algoritmo di rimpiazzamento ...
+Non c'è bisogno di usare l'algoritmo di rimpiazzamento.
+Aggiorno le statistiche del server con 15 dati in più:
+Statistiche del server aggiornate.
+Salvataggio dei contenuti del file test1.txt riuscito.
+Nuova richiesta arrivata.
+Pathname ricevuto: test2.txt
+Creazione del file test2.txt...
+Il file test2.txt è stato creato correttamente.
+Contenuti del file appena ricevuto: ciao
+Scrivo i contenuti nel file test2.txt...
+Controllo se c'è da utilizzare l'algoritmo di rimpiazzamento ...
+Non c'è bisogno di usare l'algoritmo di rimpiazzamento.
+Aggiorno le statistiche del server con 5 dati in più:
+Statistiche del server aggiornate.
+Salvataggio dei contenuti del file test2.txt riuscito.
+Nuova richiesta arrivata.
+Pathname ricevuto: test3.txt
+Creazione del file test3.txt...
+Il file test3.txt è stato creato correttamente.
+Contenuti del file appena ricevuto: scrittura
+Scrivo i contenuti nel file test3.txt...
+Controllo se c'è da utilizzare l'algoritmo di rimpiazzamento ...
+Non c'è bisogno di usare l'algoritmo di rimpiazzamento.
+Aggiorno le statistiche del server con 10 dati in più:
+Statistiche del server aggiornate.
+Salvataggio dei contenuti del file test3.txt riuscito.
+Nuova richiesta arrivata.
+Pathname ricevuto: dirtest2.txt
+Creazione del file dirtest2.txt...
+Il file dirtest2.txt è stato creato correttamente.
+Contenuti del file appena ricevuto: delle
+Scrivo i contenuti nel file dirtest2.txt...
+Controllo se c'è da utilizzare l'algoritmo di rimpiazzamento ...
+Non c'è bisogno di usare l'algoritmo di rimpiazzamento.
+Aggiorno le statistiche del server con 6 dati in più:
+Statistiche del server aggiornate.
+Salvataggio dei contenuti del file dirtest2.txt riuscito.
+Nuova richiesta arrivata.
+Pathname ricevuto: dirtest1.txt
+Creazione del file dirtest1.txt...
+Il file dirtest1.txt è stato creato correttamente.
+Contenuti del file appena ricevuto: prova
+Scrivo i contenuti nel file dirtest1.txt...
+Controllo se c'è da utilizzare l'algoritmo di rimpiazzamento ...
+Non c'è bisogno di usare l'algoritmo di rimpiazzamento.
+Aggiorno le statistiche del server con 6 dati in più:
+Statistiche del server aggiornate.
+Salvataggio dei contenuti del file dirtest1.txt riuscito.
+Nuova richiesta arrivata.
+Pathname ricevuto: dirtest3.txt
+Creazione del file dirtest3.txt...
+Il file dirtest3.txt è stato creato correttamente.
+Contenuti del file appena ricevuto: cartelle
+Scrivo i contenuti nel file dirtest3.txt...
+Controllo se c'è da utilizzare l'algoritmo di rimpiazzamento ...
+Non c'è bisogno di usare l'algoritmo di rimpiazzamento.
+Aggiorno le statistiche del server con 9 dati in più:
+Statistiche del server aggiornate.
+Salvataggio dei contenuti del file dirtest3.txt riuscito.
+Nuova richiesta arrivata.
+Pathname ricevuto: test11.txt
+Creazione del file test11.txt...
+Il file test11.txt è stato creato correttamente.
+Contenuti del file appena ricevuto: Prova
+Scrivo i contenuti nel file test11.txt...
+Controllo se c'è da utilizzare l'algoritmo di rimpiazzamento ...
+Procedo con il rimpiazzamento
+Avvio la procedura di rimpiazzamento file.
+Invierò al client il file test7.txt. Il suo contenuto è di 6 bytes
+File test7.txt inviato al client.
+Sto per rimuovere il file test7.txt
+Sto per chiudere il file test7.txt
+Comprimo il file test7.txt..., dimensione prima della compressione: 6 bytes
+File test7.txt compresso, dimensione attuale: 3 bytes
+File test7.txt chiuso!
+File test7.txt rimosso correttamente!
+Il rimpiazzamento è andato a termine!
+Aggiorno le statistiche del server con 6 dati in più:
+Statistiche del server aggiornate.
+Salvataggio dei contenuti del file test11.txt riuscito.
+Nuova richiesta arrivata.
+Pathname ricevuto: test10.txt
+Creazione del file test10.txt...
+Il file test10.txt è stato creato correttamente.
+Contenuti del file appena ricevuto: server
+Scrivo i contenuti nel file test10.txt...
+Controllo se c'è da utilizzare l'algoritmo di rimpiazzamento ...
+Procedo con il rimpiazzamento
+Avvio la procedura di rimpiazzamento file.
+Invierò al client il file test6.txt. Il suo contenuto è di 6 bytes
+File test6.txt inviato al client.
+Sto per rimuovere il file test6.txt
+Sto per chiudere il file test6.txt
+Comprimo il file test6.txt..., dimensione prima della compressione: 6 bytes
+File test6.txt compresso, dimensione attuale: 103 bytes
+File test6.txt chiuso!
+File test6.txt rimosso correttamente!
+Il rimpiazzamento è andato a termine!
+Aggiorno le statistiche del server con 7 dati in più:
+Statistiche del server aggiornate.
+Salvataggio dei contenuti del file test10.txt riuscito.
+Nuova richiesta arrivata.
+Pathname ricevuto: test8.txt
+Creazione del file test8.txt...
+Il file test8.txt è stato creato correttamente.
+Contenuti del file appena ricevuto: scrittura
+Scrivo i contenuti nel file test8.txt...
+Controllo se c'è da utilizzare l'algoritmo di rimpiazzamento ...
+Procedo con il rimpiazzamento
+Avvio la procedura di rimpiazzamento file.
+Invierò al client il file test4.txt. Il suo contenuto è di 3 bytes
+File test4.txt inviato al client.
+Sto per rimuovere il file test4.txt
+Sto per chiudere il file test4.txt
+Comprimo il file test4.txt..., dimensione prima della compressione: 3 bytes
+File test4.txt compresso, dimensione attuale: 101 bytes
+File test4.txt chiuso!
+File test4.txt rimosso correttamente!
+Il rimpiazzamento è andato a termine!
+Aggiorno le statistiche del server con 10 dati in più:
+Statistiche del server aggiornate.
+Salvataggio dei contenuti del file test8.txt riuscito.
+Nuova richiesta arrivata.
+Pathname ricevuto: test9.txt
+Creazione del file test9.txt...
+Il file test9.txt è stato creato correttamente.
+Contenuti del file appena ricevuto: su
+Scrivo i contenuti nel file test9.txt...
+Controllo se c'è da utilizzare l'algoritmo di rimpiazzamento ...
+Procedo con il rimpiazzamento
+Avvio la procedura di rimpiazzamento file.
+Invierò al client il file test5.txt. Il suo contenuto è di 7 bytes
+File test5.txt inviato al client.
+Sto per rimuovere il file test5.txt
+Sto per chiudere il file test5.txt
+Comprimo il file test5.txt..., dimensione prima della compressione: 7 bytes
+File test5.txt compresso, dimensione attuale: 103 bytes
+File test5.txt chiuso!
+File test5.txt rimosso correttamente!
+Il rimpiazzamento è andato a termine!
+Aggiorno le statistiche del server con 3 dati in più:
+Statistiche del server aggiornate.
+Salvataggio dei contenuti del file test9.txt riuscito.
+Nuova richiesta arrivata.
+Ricevuto un SIGHUP.
+Nuova richiesta arrivata.
+Sto per rimuovere il file test1.txt
+Sto per chiudere il file test1.txt
+File test1.txt chiuso!
+File test1.txt rimosso correttamente!
+Sto per rimuovere il file test2.txt
+Sto per chiudere il file test2.txt
+File test2.txt chiuso!
+File test2.txt rimosso correttamente!
+Sto per rimuovere il file test3.txt
+Sto per chiudere il file test3.txt
+File test3.txt chiuso!
+File test3.txt rimosso correttamente!
+Sto per rimuovere il file dirtest2.txt
+Sto per chiudere il file dirtest2.txt
+File dirtest2.txt chiuso!
+File dirtest2.txt rimosso correttamente!
+Sto per rimuovere il file dirtest1.txt
+Sto per chiudere il file dirtest1.txt
+File dirtest1.txt chiuso!
+File dirtest1.txt rimosso correttamente!
+Sto per rimuovere il file dirtest3.txt
+Sto per chiudere il file dirtest3.txt
+File dirtest3.txt chiuso!
+File dirtest3.txt rimosso correttamente!
+Sto per rimuovere il file test11.txt
+Sto per chiudere il file test11.txt
+File test11.txt chiuso!
+File test11.txt rimosso correttamente!
+Sto per rimuovere il file test10.txt
+Sto per chiudere il file test10.txt
+File test10.txt chiuso!
+File test10.txt rimosso correttamente!
+Sto per rimuovere il file test8.txt
+Sto per chiudere il file test8.txt
+File test8.txt chiuso!
+File test8.txt rimosso correttamente!
+Sto per rimuovere il file test9.txt
+Sto per chiudere il file test9.txt
+File test9.txt chiuso!
+File test9.txt rimosso correttamente!
+Chiusura server

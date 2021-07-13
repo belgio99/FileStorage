@@ -1,0 +1,155 @@
+Inizio file di log del server
+Numero di thread worker impostato su: 1
+Dimensione della memoria impostata su: 128 MB
+Numero massimo di file memorizzabili impostato su: 10000
+Nome del file del socket: /tmp/LSOSocket.sk
+Creazione del socket...
+Bind riuscita.
+Socket creato.
+Nuova richiesta arrivata.
+Pathname ricevuto: test1.txt
+Creazione del file test1.txt...
+Il file test1.txt è stato creato correttamente.
+Contenuti del file appena ricevuto: Prova
+Scrivo i contenuti nel file test1.txt...
+Controllo se c'è da utilizzare l'algoritmo di rimpiazzamento ...
+Non c'è bisogno di usare l'algoritmo di rimpiazzamento.
+Aggiorno le statistiche del server con 15 dati in più:
+Statistiche del server aggiornate.
+Salvataggio dei contenuti del file test1.txt riuscito.
+Nuova richiesta arrivata.
+Nuova richiesta arrivata.
+Pathname ricevuto: test1.txt
+Creazione del file test1.txt...
+Impossibile creare il file test1.txt, il file è già esistente nel server!
+Contenuti del file appena ricevuto: Prova
+Nuova richiesta arrivata.
+Pathname ricevuto: test2.txt
+Creazione del file test2.txt...
+Il file test2.txt è stato creato correttamente.
+Contenuti del file appena ricevuto: ciao
+Scrivo i contenuti nel file test2.txt...
+Controllo se c'è da utilizzare l'algoritmo di rimpiazzamento ...
+Non c'è bisogno di usare l'algoritmo di rimpiazzamento.
+Aggiorno le statistiche del server con 5 dati in più:
+Statistiche del server aggiornate.
+Salvataggio dei contenuti del file test2.txt riuscito.
+Nuova richiesta arrivata.
+Nuova richiesta arrivata.
+Pathname ricevuto: dirtest2.txt
+Creazione del file dirtest2.txt...
+Il file dirtest2.txt è stato creato correttamente.
+Contenuti del file appena ricevuto: delle
+Scrivo i contenuti nel file dirtest2.txt...
+Controllo se c'è da utilizzare l'algoritmo di rimpiazzamento ...
+Non c'è bisogno di usare l'algoritmo di rimpiazzamento.
+Aggiorno le statistiche del server con 6 dati in più:
+Statistiche del server aggiornate.
+Salvataggio dei contenuti del file dirtest2.txt riuscito.
+Nuova richiesta arrivata.
+Pathname ricevuto: dirtest1.txt
+Creazione del file dirtest1.txt...
+Il file dirtest1.txt è stato creato correttamente.
+Contenuti del file appena ricevuto: prova
+Scrivo i contenuti nel file dirtest1.txt...
+Controllo se c'è da utilizzare l'algoritmo di rimpiazzamento ...
+Non c'è bisogno di usare l'algoritmo di rimpiazzamento.
+Aggiorno le statistiche del server con 6 dati in più:
+Statistiche del server aggiornate.
+Salvataggio dei contenuti del file dirtest1.txt riuscito.
+Nuova richiesta arrivata.
+Pathname ricevuto: dirtest3.txt
+Creazione del file dirtest3.txt...
+Il file dirtest3.txt è stato creato correttamente.
+Contenuti del file appena ricevuto: cartelle
+Scrivo i contenuti nel file dirtest3.txt...
+Controllo se c'è da utilizzare l'algoritmo di rimpiazzamento ...
+Non c'è bisogno di usare l'algoritmo di rimpiazzamento.
+Aggiorno le statistiche del server con 9 dati in più:
+Statistiche del server aggiornate.
+Salvataggio dei contenuti del file dirtest3.txt riuscito.
+Nuova richiesta arrivata.
+Nuova richiesta arrivata.
+Pathname ricevuto: test1.txt
+Cerco il file test1.txt...
+Il file test1.txt è stato trovato nel server.
+Append del file test1.txt
+Contenuti del file appena ricevuto: provaappend
+Controllo se c'è da utilizzare l'algoritmo di rimpiazzamento ...
+Non c'è bisogno di usare l'algoritmo di rimpiazzamento.
+Aggiorno le statistiche del server con 11 dati in più:
+Statistiche del server aggiornate.
+Append del file test1.txt terminato correttamente.
+Nuova richiesta arrivata.
+Nuova richiesta arrivata.
+Pathname ricevuto: test2.txt
+Cerco il file test2.txt...
+Il file test2.txt è stato trovato nel server.
+Sto per chiudere il file test2.txt
+Comprimo il file test2.txt..., dimensione prima della compressione: 5 bytes
+File test2.txt compresso, dimensione attuale: 102 bytes
+File test2.txt chiuso!
+Nuova richiesta arrivata.
+Nuova richiesta arrivata.
+Pathname ricevuto: test2.txt
+Apro il file test2.txt...
+Decomprimo il file test2.txt..., dimensione prima della decompressione: 102 bytes
+File test2.txt decompresso, il file è tornato alla sua dimensione originale di: 5 bytes
+File test2.txt aperto.
+Nuova richiesta arrivata.
+Nuova richiesta arrivata.
+Pathname ricevuto: test1.txt
+Cerco il file test1.txt...
+Il file test1.txt è stato trovato nel server.
+Sto per inviare il file test1.txt al client
+Il file test1.txt è stato inviato correttamente.
+Nuova richiesta arrivata.
+Pathname ricevuto: test2.txt
+Cerco il file test2.txt...
+Il file test2.txt è stato trovato nel server.
+Sto per inviare il file test2.txt al client
+Il file test2.txt è stato inviato correttamente.
+Nuova richiesta arrivata.
+Nuova richiesta arrivata.
+Pathname ricevuto: test1.txt
+Cerco il file test1.txt...
+Il file test1.txt è stato trovato nel server.
+Lock del file test1.txt...
+Lock del file test1.txt riuscita!
+Nuova richiesta arrivata.
+Pathname ricevuto: test1.txt
+Cerco il file test1.txt...
+Il file test1.txt è stato trovato nel server.
+Unlock del file test1.txt...
+Lock del file test1.txt riuscita!
+Nuova richiesta arrivata.
+Nuova richiesta arrivata.
+Pathname ricevuto: test1.txt
+Cerco il file test1.txt...
+Il file test1.txt è stato trovato nel server.
+Sto per rimuovere il file test1.txt
+Sto per chiudere il file test1.txt
+Comprimo il file test1.txt..., dimensione prima della compressione: 26 bytes
+File test1.txt compresso, dimensione attuale: 13 bytes
+File test1.txt chiuso!
+File test1.txt rimosso correttamente!
+Nuova richiesta arrivata.
+Ricevuto un SIGHUP.
+Nuova richiesta arrivata.
+Sto per rimuovere il file test2.txt
+Sto per chiudere il file test2.txt
+File test2.txt chiuso!
+File test2.txt rimosso correttamente!
+Sto per rimuovere il file dirtest2.txt
+Sto per chiudere il file dirtest2.txt
+File dirtest2.txt chiuso!
+File dirtest2.txt rimosso correttamente!
+Sto per rimuovere il file dirtest1.txt
+Sto per chiudere il file dirtest1.txt
+File dirtest1.txt chiuso!
+File dirtest1.txt rimosso correttamente!
+Sto per rimuovere il file dirtest3.txt
+Sto per chiudere il file dirtest3.txt
+File dirtest3.txt chiuso!
+File dirtest3.txt rimosso correttamente!
+Chiusura server

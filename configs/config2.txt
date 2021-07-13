@@ -1,0 +1,5 @@
+threadnumber=4
+memorysize=1
+maxfilenumber=10
+socketname=/tmp/LSOSocket.sk
+logfilepath=./log/ServerLogTest2.log
