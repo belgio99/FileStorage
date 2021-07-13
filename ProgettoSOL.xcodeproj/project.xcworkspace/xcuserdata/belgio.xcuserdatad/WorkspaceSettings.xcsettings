@@ -4,8 +4,12 @@
 <dict>
 	<key>BuildLocationStyle</key>
 	<string>UseAppPreferences</string>
+	<key>CustomBuildIntermediatesPath</key>
+	<string>/Users/belgio/Desktop/Build/Intermediates.noindex</string>
 	<key>CustomBuildLocationType</key>
-	<string>RelativeToDerivedData</string>
+	<string>Absolute</string>
+	<key>CustomBuildProductsPath</key>
+	<string>/Users/belgio/Library/Mobile Documents/com~apple~CloudDocs/Xcode/Esercizi SOL/ProgettoSOL/bins</string>
 	<key>DerivedDataLocationStyle</key>
 	<string>Default</string>
 	<key>IssueFilterStyle</key>

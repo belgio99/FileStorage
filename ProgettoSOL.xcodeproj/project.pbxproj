@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		322916D8269C84A300510BF4 /* shoco.c in Sources */ = {isa = PBXBuildFile; fileRef = 322916D7269C84A300510BF4 /* shoco.c */; };
 		32B667C926833A5700C6CA9A /* server.c in Sources */ = {isa = PBXBuildFile; fileRef = 32B667C626833A5700C6CA9A /* server.c */; };
 		32B667CA26833A5A00C6CA9A /* client.c in Sources */ = {isa = PBXBuildFile; fileRef = 32B667C426833A5700C6CA9A /* client.c */; };
 		32B667DC26833B9700C6CA9A /* api.c in Sources */ = {isa = PBXBuildFile; fileRef = 32B667C526833A5700C6CA9A /* api.c */; };
@@ -38,17 +39,21 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		322916D6269C84A300510BF4 /* shoco.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shoco.h; sourceTree = "<group>"; };
+		322916D7269C84A300510BF4 /* shoco.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = shoco.c; sourceTree = "<group>"; };
 		3241F1AB2671183A005AEF2E /* Server */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Server; sourceTree = BUILT_PRODUCTS_DIR; };
 		3241F1B92671186E005AEF2E /* Client */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Client; sourceTree = BUILT_PRODUCTS_DIR; };
-		32B667C426833A5700C6CA9A /* client.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = client.c; path = src/client.c; sourceTree = SOURCE_ROOT; };
+		32966978269D79B70095B84F /* shoco_model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shoco_model.h; sourceTree = "<group>"; };
+		3299E4EE268361380046FE77 /* test2.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = test2.sh; sourceTree = "<group>"; };
+		3299E4EF268361380046FE77 /* test1.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = test1.sh; sourceTree = "<group>"; };
+		32B667C426833A5700C6CA9A /* client.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = client.c; path = src/client.c; sourceTree = SOURCE_ROOT; usesTabs = 1; };
 		32B667C526833A5700C6CA9A /* api.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = api.c; path = src/api.c; sourceTree = SOURCE_ROOT; };
 		32B667C626833A5700C6CA9A /* server.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = server.c; path = src/server.c; sourceTree = SOURCE_ROOT; };
 		32B667D626833AC100C6CA9A /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = utils.h; path = header/utils.h; sourceTree = SOURCE_ROOT; };
 		32B667D726833AC100C6CA9A /* linkedlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = linkedlist.h; path = header/linkedlist.h; sourceTree = SOURCE_ROOT; };
 		32B667D826833AC100C6CA9A /* api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = api.h; path = header/api.h; sourceTree = SOURCE_ROOT; };
 		32B667D926833AC100C6CA9A /* icl_hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = icl_hash.h; path = header/icl_hash.h; sourceTree = SOURCE_ROOT; };
-		32B667DE26833C8500C6CA9A /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; };
-		32B667DF26833C9E00C6CA9A /* config.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = config.txt; sourceTree = "<group>"; };
+		32B667DE26833C8500C6CA9A /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = SOURCE_ROOT; usesTabs = 1; };
 		32B667E226833D2F00C6CA9A /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = utils.c; path = include/utils.c; sourceTree = SOURCE_ROOT; };
 		32B667E326833D2F00C6CA9A /* icl_hash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = icl_hash.c; path = include/icl_hash.c; sourceTree = SOURCE_ROOT; };
 		32B667E426833D2F00C6CA9A /* linkedlist.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = linkedlist.c; path = include/linkedlist.c; sourceTree = SOURCE_ROOT; };
@@ -75,11 +80,11 @@
 		3241F1A22671183A005AEF2E = {
 			isa = PBXGroup;
 			children = (
+				3299E4ED268361380046FE77 /* scripts */,
 				327BB76B267E048000094233 /* include */,
 				32B667D526833AC100C6CA9A /* header */,
 				32B667C326833A4700C6CA9A /* src */,
 				32B667DE26833C8500C6CA9A /* makefile */,
-				32B667DF26833C9E00C6CA9A /* config.txt */,
 				3241F1AC2671183A005AEF2E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -99,9 +104,19 @@
 				32B667E326833D2F00C6CA9A /* icl_hash.c */,
 				32B667E426833D2F00C6CA9A /* linkedlist.c */,
 				32B667E226833D2F00C6CA9A /* utils.c */,
+				322916D7269C84A300510BF4 /* shoco.c */,
 			);
 			path = include;
 			sourceTree = SOURCE_ROOT;
+		};
+		3299E4ED268361380046FE77 /* scripts */ = {
+			isa = PBXGroup;
+			children = (
+				3299E4EF268361380046FE77 /* test1.sh */,
+				3299E4EE268361380046FE77 /* test2.sh */,
+			);
+			path = scripts;
+			sourceTree = "<group>";
 		};
 		32B667C326833A4700C6CA9A /* src */ = {
 			isa = PBXGroup;
@@ -116,6 +131,8 @@
 		32B667D526833AC100C6CA9A /* header */ = {
 			isa = PBXGroup;
 			children = (
+				32966978269D79B70095B84F /* shoco_model.h */,
+				322916D6269C84A300510BF4 /* shoco.h */,
 				32B667D626833AC100C6CA9A /* utils.h */,
 				32B667D726833AC100C6CA9A /* linkedlist.h */,
 				32B667D826833AC100C6CA9A /* api.h */,
@@ -201,6 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				322916D8269C84A300510BF4 /* shoco.c in Sources */,
 				32B667E726833D2F00C6CA9A /* linkedlist.c in Sources */,
 				32B667E626833D2F00C6CA9A /* icl_hash.c in Sources */,
 				32B667E526833D2F00C6CA9A /* utils.c in Sources */,
@@ -227,11 +245,16 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_OPTIMIZATION_PROFILE_FILE = "";
+				CLANG_STATIC_ANALYZER_MODE = deep;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
@@ -258,7 +281,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -268,6 +291,7 @@
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
@@ -276,6 +300,8 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "";
+				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -286,11 +312,16 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_OPTIMIZATION_PROFILE_FILE = "";
+				CLANG_STATIC_ANALYZER_MODE = deep;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
@@ -317,10 +348,12 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
@@ -328,6 +361,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_CFLAGS = "";
+				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -335,10 +370,12 @@
 		3241F1B32671183A005AEF2E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3RSHW2UZZV;
 				ENABLE_HARDENED_RUNTIME = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				OTHER_CFLAGS = "-Wall";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -346,10 +383,12 @@
 		3241F1B42671183A005AEF2E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3RSHW2UZZV;
 				ENABLE_HARDENED_RUNTIME = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				OTHER_CFLAGS = "-Wall";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -361,6 +400,7 @@
 				DEVELOPMENT_TEAM = 3RSHW2UZZV;
 				ENABLE_HARDENED_RUNTIME = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				OTHER_CFLAGS = "-Wall";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -372,6 +412,7 @@
 				DEVELOPMENT_TEAM = 3RSHW2UZZV;
 				ENABLE_HARDENED_RUNTIME = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				OTHER_CFLAGS = "-Wall";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
