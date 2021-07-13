@@ -1,4 +1,0 @@
-threadnumber=2
-memorysize=100
-maxfilenumber=100
-socketname=/tmp/LSOSocket.txt

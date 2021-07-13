@@ -1,38 +1,69 @@
+CC          = gcc
+CFLAGS		= -pedantic -std=c99 -Wall -g
 SHELL           = /bin/bash
+EXTRAFLAGS  =  -lpthread
+OBJ			= bins/
+SRC			= src/
+INCL			= include/
+HEAD			= header/
+LDFLAGS 		= -L.
+OPTFLAGS		= -O3
 TARGETS		= $(OBJ)server \
 				$(OBJ)client
+
+
 
 
 .PHONY: all clean cleanall test1 test2
 .SUFFIXES: .c .h
 
 
+
 all: $(TARGETS)
 
 
-$(OBJ)client:
-	gcc -pedantic -Wall -g -I ./header -o binary/client src/client.c include/icl_hash.c include/utils.c include/linkedlist.c src/api.c -lpthread
+$(OBJ)client: $(OBJ)api.o $(OBJ)client.o $(OBJ)utils.o
+	$(CC) $(CFLAGS) -I $(HEAD) $(OPTFLAGS) -o $@ $^ $(EXTRAFLAGS)
 
-$(OBJ)server:
-	gcc -pedantic -Wall -g -I ./header -o binary/server src/server.c include/icl_hash.c include/utils.c include/linkedlist.c -lpthread
+$(OBJ)server: $(OBJ)server.o $(OBJ)icl_hash.o $(OBJ)linkedlist.o $(OBJ)utils.o $(OBJ)shoco.o
+	$(CC) $(CFLAGS) -I $(HEAD) $(OPTFLAGS) -o $@ $^ $(EXTRAFLAGS)
 
+$(OBJ)server.o: $(SRC)server.c
+	$(CC) $(CFLAGS) $(OPTFLAGS) $< -c -o $@
+
+$(OBJ)client.o: $(SRC)client.c
+	$(CC) $(CFLAGS) $(OPTFLAGS) $< -c -o $@
+
+$(OBJ)api.o: $(SRC)api.c $(INCL)utils.c
+	$(CC) $(CFLAGS) $(OPTFLAGS) $< -c -o $@
+
+$(OBJ)icl_hash.o: $(INCL)icl_hash.c
+	$(CC) $(CFLAGS) $(OPTFLAGS) $< -c -o $@
+
+$(OBJ)linkedlist.o: $(INCL)linkedlist.c
+	$(CC) $(CFLAGS) $(OPTFLAGS) $< -c -o $@
+
+$(OBJ)utils.o: $(INCL)utils.c
+	$(CC) $(CFLAGS) -Wno-pointer-arith $(OPTFLAGS) $< -c -o $@
+
+$(OBJ)shoco.o: $(INCL)shoco.c
+	$(CC) $(CFLAGS) -Wno-overflow $(OPTFLAGS) $< -c -o $@
 
 
 clean		:
 	rm -f $(TARGETS)
 cleanall	: clean
-	\ rm -f ./bin/*.o *~ *.a ./tmp/config.txt /tmp/LSOSocket.txt
+	rm -f ./bins/*.o *~ *.a /tmp/config1.txt /tmp/config2.txt ./bins/serverLog.log
+cponly :
+	cp ./configs/config1.txt /tmp/config.txt
 
-test1	:
-	cp config.txt /tmp/config.txt
-	cp LSOSocket.txt /tmp/LSOSocket.txt
-	valgrind --leak-check=full ./binary/server /tmp/config.txt &
-	sleep 3s
-	bash ./scripts/test1.sh; kill -1 $$!
+	
+test1	: all
+	rm -f ./serverLog.log
+	cp ./configs/config1.txt /tmp/config.txt
+	bash ./scripts/test1.sh;
 
-test2	:
-	cp config.txt /tmp/config.txt
-	cp LSOSocket.txt /tmp/LSOSocket.txt
-	./binary/server /tmp/config.txt &
-	sleep 3s
-	bash ./scripts/test2.sh; kill -1 $$!
+test2	: all
+	rm -f ./serverLog.log
+	cp ./configs/config2.txt /tmp/config.txt
+	bash ./scripts/test2.sh;
