@@ -8,6 +8,7 @@
 #ifndef api_h
 #define api_h
 
+#include "utils.h"
 
 int openConnection(const char* sockname, int msec, const struct timespec abstime);
 
