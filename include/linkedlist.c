@@ -12,8 +12,8 @@
 #include <pthread.h>
 #include <sys/types.h>
 
-#include "icl_hash.h"
-#include "linkedlist.h"
+#include "../header/icl_hash.h"
+#include "../header/linkedlist.h"
 
 
 int insertNode(int node, list **last, list **l){
@@ -49,7 +49,7 @@ int removeNode(list **l, list **last){
 
 int insertInList(int node, serverFile **file, listfiles **l){
 	listfiles *new = malloc(sizeof(listfiles));
-	if(!new){
+	if(new == NULL){
 		perror("malloc");
 		return -1;
 	}

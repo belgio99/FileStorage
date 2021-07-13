@@ -2,21 +2,25 @@
 //  linkedlist.h
 //  Server
 //
-//  Created by BelGio on 20/06/21.
+//  Created on 20/06/21.
 //
 
 #ifndef linkedlist_h
 #define linkedlist_h
 
 #include <stdio.h>
+#include <pthread.h>
 
 typedef struct file {
 	char* path;
 	_Bool isOpened;
 	_Bool isLocked;
 	pthread_mutex_t filemtx;
+	pthread_mutex_t filelockmtx;
+	pthread_cond_t	filelockcond;
 	int user;
 	size_t size;
+	size_t compressedsize;
 	char* filecontent;
 } serverFile;
 
